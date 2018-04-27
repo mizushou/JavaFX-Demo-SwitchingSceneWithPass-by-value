@@ -4,9 +4,6 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -19,28 +16,34 @@ public class Main extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage) throws Exception {
         window = primaryStage;
 
-        // Make loder
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("sample.fxml"));
-        Parent root = loader.load();
+        // Make loader1
+        FXMLLoader loader1 = new FXMLLoader(getClass().getResource("layout1.fxml"));
+        Parent root = loader1.load();
+
+        // Make loader2
+        FXMLLoader loader2 = new FXMLLoader(getClass().getResource("layout2.fxml"));
+        Parent root2 = loader2.load();
+
+        // Set scene1
         scene1 = new Scene(root, 200, 200);
         window.setTitle("Demo : Pass-by-value");
         window.setScene(scene1);
 
-        //Button 2
-        Button button2 = new Button("This scene sucks, go back to scene 1");
-        button2.setOnAction(e -> window.setScene(scene1));
+        // Make scene2
+        scene2 = new Scene(root2, 600, 300);
 
-        //Layout 2
-        StackPane layout2 = new StackPane();
-        layout2.getChildren().add(button2);
-        scene2 = new Scene(layout2, 600, 300);
+        // Obtain controller1,2
+        Controller1 ctrl1 = (Controller1) loader1.getController();
+        Controller2 ctrl2 = (Controller2) loader2.getController();
 
-        Controller ctrl = (Controller) loader.getController();
-        ctrl.setThisWindow(window);
-        ctrl.setNextScnen(scene2);
+        ctrl1.setThisWindow(window);
+        ctrl1.setNextScnen(scene2);
+
+        ctrl2.setThisWindow(window);
+        ctrl2.setPrevScnen(scene1);
 
         window.show();
     }

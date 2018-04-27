@@ -7,11 +7,12 @@ import javafx.stage.Stage;
 
 
 
-public class Controller {
+public class Controller1 {
 
-    Stage thisWindow;
-    Scene thisScnen;
-    Scene nextScnen;
+    private Stage thisWindow;
+
+    private Scene thisScnen;
+    private Scene nextScnen;
 
     public void setThisWindow(Stage thisWindow) {
         this.thisWindow = thisWindow;
